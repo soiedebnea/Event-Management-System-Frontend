@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Program &mdash; Event Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Roboto+Slab:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <h1 class="masthead-title">The Program</h1>
+      <p class="masthead-sub">Plan events, seat your guests, run the schedule &mdash; from one desk.</p>
+    </div>
+    <div class="masthead-meta" id="api-status">checking API&hellip;</div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ================= VIEW: LIST + CREATE ================= -->
+    <section id="view-list" class="view">
+
+      <div class="grid-two">
+        <div class="col-events">
+          <div class="section-head">
+            <h2>Upcoming &amp; past events</h2>
+            <span class="count-pill" id="event-count">0</span>
+          </div>
+          <div id="events-empty" class="empty-state" hidden>
+            <p><strong>No events yet.</strong></p>
+            <p>Create your first one using the form to add it to the program.</p>
+          </div>
+          <div id="events-list" class="ticket-list"></div>
+        </div>
+
+        <aside class="col-create">
+          <div class="panel">
+            <h2>New event</h2>
+            <form id="create-event-form" novalidate>
+              <label>
+                Title
+                <input type="text" name="title" required placeholder="Autumn Product Summit" />
+              </label>
+              <label>
+                Description
+                <textarea name="description" rows="3" placeholder="What is this event about?"></textarea>
+              </label>
+              <div class="field-row">
+                <label>
+                  Date
+                  <input type="date" name="date" required />
+                </label>
+                <label>
+                  Time
+                  <input type="time" name="time" required />
+                </label>
+              </div>
+              <label>
+                Location
+                <input type="text" name="location" required placeholder="Hall B, Convention Centre" />
+              </label>
+              <label>
+                Capacity <span class="optional">(optional)</span>
+                <input type="number" name="capacity" min="0" placeholder="Leave blank for unlimited" />
+              </label>
+              <button type="submit" class="btn btn-primary">Add to program</button>
+              <p class="form-message" id="create-event-message"></p>
+            </form>
+          </div>
+        </aside>
+      </div>
+
+    </section>
+
+    <!-- ================= VIEW: EVENT DETAIL ================= -->
+    <section id="view-detail" class="view" hidden>
+
+      <button class="btn-link" id="back-to-list">&larr; Back to program</button>
+
+      <div class="detail-head">
+        <div>
+          <h2 id="detail-title">Event title</h2>
+          <p id="detail-meta" class="detail-meta"></p>
+          <p id="detail-description" class="detail-description"></p>
+        </div>
+        <button class="btn btn-danger" id="delete-event-btn">Delete event</button>
+      </div>
+
+      <div class="grid-two">
+
+        <!-- Attendees -->
+        <div class="col-events">
+          <div class="section-head">
+            <h3>Registered attendees</h3>
+            <span class="count-pill" id="attendee-count">0 / &infin;</span>
+          </div>
+
+          <form id="register-attendee-form" class="inline-form" novalidate>
+            <input type="text" name="name" required placeholder="Full name" />
+            <input type="email" name="email" required placeholder="Email address" />
+            <input type="tel" name="phone" placeholder="Phone (optional)" />
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+          <p class="form-message" id="register-message"></p>
+
+          <div id="attendees-empty" class="empty-state" hidden>
+            <p>No one has registered yet.</p>
+          </div>
+          <ul class="attendee-list" id="attendees-list"></ul>
+        </div>
+
+        <!-- Schedule -->
+        <div class="col-create">
+          <div class="panel">
+            <h3>Add to schedule</h3>
+            <form id="add-schedule-form" novalidate>
+              <label>
+                Session title
+                <input type="text" name="title" required placeholder="Opening keynote" />
+              </label>
+              <div class="field-row">
+                <label>
+                  Starts
+                  <input type="time" name="startTime" required />
+                </label>
+                <label>
+                  Ends
+                  <input type="time" name="endTime" required />
+                </label>
+              </div>
+              <label>
+                Speaker <span class="optional">(optional)</span>
+                <input type="text" name="speaker" placeholder="Jordan Blake" />
+              </label>
+              <label>
+                Notes <span class="optional">(optional)</span>
+                <textarea name="description" rows="2" placeholder="Room, format, or other notes"></textarea>
+              </label>
+              <button type="submit" class="btn btn-primary">Add session</button>
+              <p class="form-message" id="schedule-message"></p>
+            </form>
+          </div>
+
+          <div class="section-head schedule-head">
+            <h3>Running order</h3>
+          </div>
+          <div id="schedule-empty" class="empty-state" hidden>
+            <p>No sessions scheduled yet.</p>
+          </div>
+          <ol class="timetable" id="schedule-list"></ol>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Event Management System &mdash; frontend talks to the backend API over HTTP.</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

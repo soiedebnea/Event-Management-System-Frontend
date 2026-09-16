@@ -1,0 +1,444 @@
+/* -------------------------------------------------------------------------
+   Tokens
+------------------------------------------------------------------------- */
+:root {
+  --paper: #EFEAE0;
+  --paper-card: #FBF8F2;
+  --ink: #1F2A24;
+  --ink-soft: #4B564E;
+  --stamp: #B23A2E;
+  --stamp-dark: #8C2C22;
+  --brass: #A9821A;
+  --brass-soft: #E7D9A8;
+  --line: #C9C0AC;
+  --line-strong: #A79C87;
+
+  --font-display: 'Roboto Slab', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1, h2, h3 { font-family: var(--font-display); color: var(--ink); margin: 0; }
+
+a { color: var(--stamp-dark); }
+
+button { font-family: var(--font-body); cursor: pointer; }
+
+/* -------------------------------------------------------------------------
+   Masthead
+------------------------------------------------------------------------- */
+.masthead {
+  border-bottom: 3px solid var(--ink);
+  padding: 2.25rem 1.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.masthead-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.masthead-sub {
+  margin: 0.35rem 0 0;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.masthead-meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+}
+
+.masthead-meta.online { color: #2F6B3B; border-color: #2F6B3B; }
+.masthead-meta.offline { color: var(--stamp-dark); border-color: var(--stamp); }
+
+/* -------------------------------------------------------------------------
+   Layout
+------------------------------------------------------------------------- */
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .grid-two { grid-template-columns: 1fr; }
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.section-head h2, .section-head h3 { font-size: 1.15rem; }
+
+.count-pill {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* -------------------------------------------------------------------------
+   Ticket-stub event cards
+------------------------------------------------------------------------- */
+.ticket-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.ticket {
+  background: var(--paper-card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.ticket::after {
+  /* perforation between the main stub and the date block */
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 108px;
+  width: 0;
+  border-left: 2px dashed var(--line-strong);
+}
+
+.ticket-body {
+  padding: 1.1rem 1.25rem;
+  cursor: pointer;
+}
+
+.ticket-body h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+}
+
+.ticket-loc {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  margin: 0.15rem 0 0.5rem;
+}
+
+.ticket-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  color: var(--ink-soft);
+}
+
+.tag.full { color: var(--stamp-dark); border-color: var(--stamp); }
+
+.ticket-date {
+  width: 108px;
+  padding: 1.1rem 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+  font-family: var(--font-mono);
+}
+
+.ticket-date .day {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--stamp-dark);
+  line-height: 1;
+}
+
+.ticket-date .month {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.ticket-date .time {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+/* -------------------------------------------------------------------------
+   Panels & forms
+------------------------------------------------------------------------- */
+.panel {
+  background: var(--paper-card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel h2, .panel h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+
+form label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.85rem;
+}
+
+form label .optional { font-style: italic; }
+
+input, textarea {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.btn {
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.6rem 1.1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--stamp);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--stamp-dark); }
+
+.btn-danger {
+  background: transparent;
+  color: var(--stamp-dark);
+  border: 1px solid var(--stamp);
+}
+.btn-danger:hover { background: var(--stamp); color: #fff; }
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0;
+  margin-bottom: 1.25rem;
+}
+.btn-link:hover { color: var(--stamp-dark); }
+
+.form-message {
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  margin: 0.6rem 0 0;
+}
+.form-message.error { color: var(--stamp-dark); }
+.form-message.success { color: #2F6B3B; }
+
+.inline-form {
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 1fr auto;
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+@media (max-width: 650px) {
+  .inline-form { grid-template-columns: 1fr; }
+}
+
+.empty-state {
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* -------------------------------------------------------------------------
+   Attendee list
+------------------------------------------------------------------------- */
+.attendee-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.attendee-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.9rem;
+}
+
+.attendee-row .who strong { display: block; font-size: 0.95rem; }
+.attendee-row .who span { font-size: 0.82rem; color: var(--ink-soft); }
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+.remove-btn:hover { color: var(--stamp-dark); }
+
+/* -------------------------------------------------------------------------
+   Detail header
+------------------------------------------------------------------------- */
+.detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.detail-head h2 { font-size: 1.7rem; margin-bottom: 0.4rem; }
+
+.detail-meta {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+}
+
+.detail-description {
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Schedule / timetable (numbered - this content is genuinely sequential)
+------------------------------------------------------------------------- */
+.schedule-head { margin-top: 0.5rem; }
+
+.timetable {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: session;
+  border-left: 2px solid var(--line-strong);
+}
+
+.timetable-item {
+  position: relative;
+  padding: 0 0 1.1rem 1.4rem;
+  counter-increment: session;
+}
+
+.timetable-item::before {
+  content: counter(session, decimal-leading-zero);
+  position: absolute;
+  left: -0.62rem;
+  top: 0.1rem;
+  background: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--brass);
+  border: 1px solid var(--brass);
+  border-radius: 999px;
+  width: 1.35rem;
+  height: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timetable-item .time-range {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.timetable-item h4 {
+  margin: 0.15rem 0 0.1rem;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+}
+
+.timetable-item .speaker {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.timetable-item .notes {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 0.2rem;
+}
+
+.timetable-item .remove-btn { margin-top: 0.3rem; }
+
+/* -------------------------------------------------------------------------
+   Footer
+------------------------------------------------------------------------- */
+.site-footer {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--line);
+}
